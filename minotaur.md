@@ -15,7 +15,7 @@ After that, let's throw nmap at it:
 
 ![PIC_NMAP](https://user-images.githubusercontent.com/93183445/140650415-24920e15-df4b-4513-9f75-8589d4ab716f.png)
 
-Let's see what directories we can find:
+Let's see what the fuzz is all about:
 
 <code>ffuf -u http://10.10.139.83/FUZZ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt</code>  
 
@@ -158,9 +158,9 @@ and execute the freshly downloaded reverse shell on the target:
 ![PIC_REV2](https://user-images.githubusercontent.com/93183445/140651333-9964013c-007a-45ff-b3f1-e1d662fa0927.png)
 
 After running linpeas.sh and searching around for a bit, I got a tip. Remember the content of one of the files we  
-found in the ftp earlier. There a timer is mentioned (didn't make the connection, I got a tip..).  
+found in the ftp earlier. Where a timer is mentioned? 
 There's a file in the root directory that we can write to.  
-Plus it is owned by root.. So let's abuse that and pack a rev-shell in that very file :)
+Plus, it is owned by root.. So let's abuse that and pack a rev-shell in that very file :)
 
 ![PIC_REV3](https://user-images.githubusercontent.com/93183445/140651338-c8f5a0cf-5939-4dac-ab46-d50150fe698f.png)
   
