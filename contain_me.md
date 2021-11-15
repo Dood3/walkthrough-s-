@@ -1,4 +1,4 @@
-# [ContainMe (TryHackMe](https://tryhackme.com/room/containme1)
+# [ContainMe (TryHackMe)](https://tryhackme.com/room/containme1)
 
 First, let's scan this thing: 
 
