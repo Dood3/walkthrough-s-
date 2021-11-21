@@ -1,6 +1,5 @@
 # [CyberCrafted (THM)](https://tryhackme.com/room/cybercrafted)
-
---------------------------------------------------------------------------------------------
+Creator: [madrinch](https://tryhackme.com/p/madrinch)
 
 ***ANSWERS 1 & 2:***
 
