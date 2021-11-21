@@ -1,4 +1,5 @@
-# [ContainMe (TryHackMe)](https://tryhackme.com/room/containme1)
+# [ContainMe (TryHackMe)](https://tryhackme.com/room/containme1) 
+Creator: [ITSecHack](https://tryhackme.com/p/ITSecHack)
 
 First, let's scan this thing: 
 
@@ -130,15 +131,3 @@ BUT:
 ![PIC_ROOT](https://user-images.githubusercontent.com/93183445/141819661-c219d315-0011-4f31-a6bf-b00a5fff87cc.png)
 
 **Thanks :)**
-
-
-
-
-
-
-
-
-
-
-
-
