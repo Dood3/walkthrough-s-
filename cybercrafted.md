@@ -56,7 +56,7 @@ Upon visiting the newly found "vulnerable" page and entering just 'hello', I gav
 Which turned out to be a rather fertile endeavour. I worked my way through the available data and ended up  
 dumping the stuff I needed to proceed:
 ```
-sqlmap -r req.txt --dbms=MySQL -D webapp -T admin --dump --batch
+sqlmap -r req.txt --dbms=MySQL -D [nope] -T [nope] --dump --batch
 ```
 ![PIC_SQL](https://user-images.githubusercontent.com/93183445/142762421-317229dd-8d26-4bb3-ab08-0cd41009f8d2.png)
 
