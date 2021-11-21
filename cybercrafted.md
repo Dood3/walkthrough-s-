@@ -9,9 +9,9 @@ To get these answers, only a thorough portscan is of essence.
 
 ***ANSWER 3:***
 
-The third question in this room asks for subdomains. So let's add something to our hosts file because there's no subdomain without cname.  
-In my case, I just went for "cyber.thm" and tried to open that in my browser. Somewhat useless in this case,  
-but it forwarded me to "cybercrafted.thm", which I hadn't in my hosts file yet. 
+The third question in this room asks for subdomains. So let's add something to the hosts file because there's no subdomain without cname.  
+I just went for "cyber.thm" and tried to open that in my browser. Somewhat useless in this case,  
+but it eventually forwarded me to "cybercrafted.thm", which I hadn't in my hosts file, yet. 
 
 ![PIC_BROWSER_1](https://user-images.githubusercontent.com/93183445/142762125-937aa05d-b22e-43ba-a61b-6f71ff12786b.png)
 
@@ -38,9 +38,10 @@ One of which presenting a login page.
 
 ***ANSWER 4:***
 
-To let feroxbuster doing its thing, I let it loose on the found subdomains in alphabetical order.  
+For feroxbuster doing its thing, I let it loose on the found subdomains in alphabetical order.  
 Meanwhile, I thought it would be a good idea to capture a request from the login page with Burp and  
-throw sqlmap at it. Which turned out useless. I'll spare you the depressing picture of sqlmap just not being able to dump anything..
+throw sqlmap at it. Which turned out as being useless. I'll spare you the depressing picture of sqlmap just not being able to dump anything..  
+But I can tell you: *it is sad..*
  
 ![PIC_FEROX](https://user-images.githubusercontent.com/93183445/142762339-5a073028-6219-468c-8996-52302caef76c.png)
 
