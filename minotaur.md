@@ -1,4 +1,5 @@
 #  [Minotaur's Labyrinth (TryHackMe)](https://tryhackme.com/room/labyrinth8llv)
+Creators: [xenox](https://tryhackme.com/p/xenox) & [spayc](https://tryhackme.com/p/spayc)
 
 First an initial scan with rustscan:
 
