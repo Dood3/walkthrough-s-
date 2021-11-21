@@ -3,7 +3,7 @@ Creator: [madrinch](https://tryhackme.com/p/madrinch)
 
 ***ANSWERS 1 & 2:***
 
-To get these answers, only a thorough portscan is of essence.
+To get these answers, only a thorough portscan is of the essence.
 
 --------------------------------------------------------------------------------------------
 
