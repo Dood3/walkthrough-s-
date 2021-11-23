@@ -11,7 +11,7 @@ To get these answers, only a thorough portscan is of the essence.
 
 The third question in this room asks for subdomains. So let's add something to the hosts file because there's no subdomain without cname.  
 I just went for "cyber.thm" and tried to open that in my browser. Somewhat useless in this case,  
-but it eventually forwarded me to "cybercrafted.thm", which I hadn't in my hosts file, yet. 
+but it eventually forwarded me to "cybercrafted.thm", which I hadn't in my hosts file, yet (facepalm-alarm..). 
 
 ![PIC_BROWSER_1](https://user-images.githubusercontent.com/93183445/142762125-937aa05d-b22e-43ba-a61b-6f71ff12786b.png)
 
