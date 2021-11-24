@@ -125,7 +125,7 @@ and I would have to spawn a new instance out of it somehow. I just wasn't able t
 program before. A little help was needed.. Thanks to the creator of this room, [madrinch](https://tryhackme.com/p/madrinch), by the way :) !!!  
 As it turned out, I also had to restart the machine...  
 
-In the end, a little fingerbreakdance was all that was needed and I finally found what I've been coming here to find:    
+In the end, a little fingerbreakdance was all that was needed and I finally found what I've been coming here for:    
 *a bit frustration, some headscratches, satisfaction, and most of all the creation of new knowlege and skills for the challenges to come*,  
 not to mention the root flag after all ;).  
 I executed the command from above with sudo, typed a shortcut, and I was root...
